@@ -20,8 +20,21 @@ st.markdown("AI-driven pricing, demand and revenue optimisation for FruitFrost I
 @st.cache_data
 def load_data():
     file_path = "FruitFrost_Pricing_Dashboard_Master.xlsx"
+    
+    # ---------------------------------------------------------
+    # DEBUGGING BLOCK: This will show us the TRUTH
+    # ---------------------------------------------------------
+    try:
+        xl = pd.ExcelFile(file_path)
+        st.error(f"DEBUG: The file '{file_path}' contains these sheets: {xl.sheet_names}")
+    except FileNotFoundError:
+        st.error(f"DEBUG: The file '{file_path}' was NOT found on the server.")
+        st.stop()
+    # ---------------------------------------------------------
+
     historical = pd.read_excel(file_path, sheet_name="Historical_Sales")
-    competitor = pd.read_excel(file_path, sheet_name="Lost_file")
+    # We suspect this next line is the killer, so we will know from the list above if "Competitor" exists
+    competitor = pd.read_excel(file_path, sheet_name="Competitor") 
     scenario = pd.read_excel(file_path, sheet_name="Scenario_Simulation")
     cost = pd.read_excel(file_path, sheet_name="Cost_Structure")
     return historical, competitor, scenario, cost
