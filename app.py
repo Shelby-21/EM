@@ -34,7 +34,7 @@ def load_data():
 
     historical = pd.read_excel(file_path, sheet_name="Historical_Sales")
     # We suspect this next line is the killer, so we will know from the list above if "Competitor" exists
-    competitor = pd.read_excel(file_path, sheet_name="Competitor") 
+    competitor = pd.read_excel(file_path, sheet_name="Lost_file") 
     scenario = pd.read_excel(file_path, sheet_name="Scenario_Simulation")
     cost = pd.read_excel(file_path, sheet_name="Cost_Structure")
     return historical, competitor, scenario, cost
